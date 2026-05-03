@@ -1,0 +1,14 @@
+{
+  "name": "orders-api-rabbitmq",
+  "version": "1.0.0",
+  "description": "API REST productora - RabbitMQ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "amqplib": "^0.10.3",
+    "uuid": "^9.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "notification-worker",
+  "version": "1.0.0",
+  "description": "Consumidor de mensajes - RabbitMQ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.3"
+  }
+}

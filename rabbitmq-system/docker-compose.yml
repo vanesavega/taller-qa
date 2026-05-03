@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Contenedor 1: El broker de mensajería
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"       # Puerto AMQP (comunicación entre servicios)
+      - "15672:15672"     # Puerto de la consola web (para ver colas en el navegador)
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # Contenedor 2: La API REST (productor de mensajes)
+  orders-api:
+    build: ./orders-api
+    container_name: orders-api-rabbit
+    ports:
+      - "3000:3000"       # Puerto para recibir peticiones HTTP
+    environment:
+      RABBITMQ_URL: amqp://admin:admin@rabbitmq:5672
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+
+  # Contenedor 3: El worker (consumidor de mensajes)
+  notification-worker:
+    build: ./notification-worker
+    container_name: notification-worker
+    environment:
+      RABBITMQ_URL: amqp://admin:admin@rabbitmq:5672
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
