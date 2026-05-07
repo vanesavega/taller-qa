@@ -2,15 +2,11 @@
 
 Asignatura: Aseguramiento de la Calidad - Ingeniería de Sistemas
 
----
-
 ## Miembros del equipo
 
 - José Manuel Quintero Rodríguez
 - Dahiana Vanesa Vega Mira
 - Ana María Valencia Quintero
-
----
 
 ## Descripción
 
@@ -98,7 +94,7 @@ docker compose up --build
 docker compose ps
 ```
 
-Debes ver: zookeeper, kafka-broker, kafka-ui, orders-api-kafka, order-events-worker, order-events-worker-2
+Debes ver: zookeeper, kafka-broker, kafka-ui, orders-api-kafka, order-events-worker
 
 4. Acceder a la interfaz de Kafka UI:
 
